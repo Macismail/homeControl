@@ -1,0 +1,39 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.strings";
+option java_outer_classname = "StringsServiceImpl";
+option objc_class_prefix = "SSI";
+
+package strings;
+
+// Interface exported by the server.
+service StringsService {
+  
+  rpc reverse(StringRequest) returns (StringResponse) {}
+  
+  rpc blackOut(RedactRequest) returns (StringResponse) {}
+
+  rpc reverseStream(stream StringRequest) returns (stream StringResponse) {}
+  
+  rpc length(stream StringRequest) returns (LengthResponse);
+  
+}
+
+message LengthResponse {
+  int32 length = 1;
+}
+
+message RedactRequest {
+  string val = 1;
+  string char = 2; 
+}
+
+message StringRequest {
+  string val = 1;
+}
+
+message StringResponse {
+  string val = 1;
+}
