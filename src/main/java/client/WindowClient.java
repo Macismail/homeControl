@@ -55,7 +55,7 @@ public class WindowClient implements ServiceObserver {
                 .usePlaintext(true)
                 .build();
         blockingStub = WindowGrpc.newBlockingStub(channel);
-        warm();
+        openwindow();
     }
 
     public boolean interested(String type) {
@@ -73,7 +73,7 @@ public class WindowClient implements ServiceObserver {
     /**
      * Say hello to server.
      */
-    public void warm() {
+    public void openwindow() {
         try {
 
             new Thread() {
