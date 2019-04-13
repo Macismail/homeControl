@@ -6,11 +6,10 @@
 package client;
 
 import java.util.List;
-import javax.swing.JPanel;
 
 /**
  *
- * @author dominic
+ * @author 
  */
 public interface ServiceObserver {
 
