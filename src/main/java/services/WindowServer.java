@@ -28,7 +28,7 @@ public class WindowServer {
                 .addService(new WindowImpl())
                 .build()
                 .start();
-        JmDNSRegistrationHelper helper = new JmDNSRegistrationHelper("Dominics", "_bed._udp.local.", "", port);
+        JmDNSRegistrationHelper helper = new JmDNSRegistrationHelper("Home", "_window._udp.local.", "", port);
         logger.info("Server started, listening on " + port);
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
@@ -68,11 +68,11 @@ public class WindowServer {
 
     private class WindowImpl extends WindowGrpc.WindowImplBase {
 
-        private int percentHot = 0;
+        private int winlevel = 0;
 
         public WindowImpl() {
-            String name = "Dominic's";
-            String serviceType = "_bed._udp.local.";
+            String name = "Home";
+            String serviceType = "_window._udp.local.";
         }
 
         @Override
@@ -86,7 +86,7 @@ public class WindowServer {
         @Override
         public void getStatus(com.google.protobuf.Empty request,
                 io.grpc.stub.StreamObserver<org.dominic.example.window.WindowStatus> responseObserver) {
-            responseObserver.onNext(WindowStatus.newBuilder().setPercentage(percentHot).build());
+            responseObserver.onNext(WindowStatus.newBuilder().setPercentage(winlevel).build());
             responseObserver.onCompleted();
         }
 
@@ -100,9 +100,9 @@ public class WindowServer {
 
             @Override
             public void run() {
-                if (percentHot < 100) {
-                    percentHot += 10;
-                    WindowStatus status = WindowStatus.newBuilder().setPercentage(percentHot).build();
+                if (winlevel < 10) {
+                    winlevel += 1;
+                    WindowStatus status = WindowStatus.newBuilder().setPercentage(winlevel).build();
                     o.onNext(status);
                 } else {
                     o.onCompleted();
