@@ -9,18 +9,16 @@ import java.util.List;
 
 /**
  *
- * @author 
+ * @author
  */
 public interface ServiceObserver {
 
-    public boolean interested(String type);
+   public boolean interested(String type);
 
-    public List<String> serviceInterests();
+   public List<String> serviceInterests();
 
-    public void serviceAdded(ServiceDescription service);
+   public void serviceAdded(ServiceDescription service);
 
-    public String getName();
-
-    public void switchService(String name);
+   public String getName();
 
 }
